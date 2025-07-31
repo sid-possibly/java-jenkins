@@ -2,7 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Compile') {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Compile Java') {
             steps {
                 echo 'Compiling Java program...'
                 sh 'mkdir -p out'
