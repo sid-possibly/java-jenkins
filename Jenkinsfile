@@ -1,13 +1,12 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            dir '.' //
+        }
+    }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Compile Java') {
             steps {
                 echo 'Compiling Java program...'
