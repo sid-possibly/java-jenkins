@@ -2,11 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Compile') {
+        stage('Build') {
             steps {
                 echo 'Compiling Java...'
-                sh 'mkdir -p out'
-                sh 'javac -d out src/Main.java'
+                sh 'javac src/Main.java'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                echo 'Running Java...'
+                sh 'java -cp src Main'
             }
         }
     }
