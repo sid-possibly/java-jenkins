@@ -2,17 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                echo 'Compiling Java...'
-                sh 'javac src/Main.java'
+                git 'https://github.com/sid-possibly/java-jenkins.git'
             }
         }
 
-        stage('Run') {
+        stage('Compile Java') {
             steps {
-                echo 'Running Java...'
-                sh 'java -cp src Main'
+                sh 'mkdir -p out'
+                sh 'javac -d out src/*.java'
+            }
+        }
+
+        stage('Run Program') {
+            steps {
+                sh 'java -cp out Main'
             }
         }
     }
